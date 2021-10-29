@@ -82,10 +82,20 @@ const Slider = () => {
                 </Slide>
                 <Slide>
                     <ImgContainer>
-                        <Image src='../images/1.jpg'/>
+                        <Image src='../images/2.jpg'/>
                     </ImgContainer>
                     <InfoContainer>
-                        <Title>SUMMER SALE</Title>
+                        <Title>WINTER SALE</Title>
+                        <Desc>DONT COMPROMISE ON STYLE GET FLAT 30% OFF FOR NEW ARRIVALS</Desc>
+                        <Button>SHOW NOW</Button>
+                    </InfoContainer>
+                </Slide>
+                <Slide>
+                    <ImgContainer>
+                        <Image src='../images/3.jpg'/>
+                    </ImgContainer>
+                    <InfoContainer>
+                        <Title>POPULAR SALE</Title>
                         <Desc>DONT COMPROMISE ON STYLE GET FLAT 30% OFF FOR NEW ARRIVALS</Desc>
                         <Button>SHOW NOW</Button>
                     </InfoContainer>
