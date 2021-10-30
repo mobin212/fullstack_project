@@ -1,5 +1,7 @@
 import styled from "styled-components"
-import{RiArrowLeftSFill, RiArrowRightSFill} from 'react-icons/ri'
+import { RiArrowLeftSFill, RiArrowRightSFill } from 'react-icons/ri'
+import React, { useState } from 'react'
+import { sliderItems } from "../data"
 
 const Container = styled.div`
     width: 100%;
@@ -20,21 +22,24 @@ const Arrow = styled.div`
     position: absolute;
     top: 0;
     bottom: 0;
-    left: ${props=> props.direction === 'left' && '10px'};
-    right: ${props=> props.direction === 'right' && '10px'};
+    left: ${props => props.direction === 'left' && '10px'};
+    right: ${props => props.direction === 'right' && '10px'};
     margin: auto;
     cursor: pointer;
     opacity: .5;
+    z-index: 2;
 `
 const Wrapper = styled.div`
     height: 100%;
     display: flex;
+    transform: translateX(${props=>props.slideIndex * -100}vw);
 `
 const Slide = styled.div`
     display: flex;
     align-items: center;
     width: 100vw;
     height: 100vh;
+    background-color: #${props => props.bg};
 `
 const ImgContainer = styled.div`
     flex: 1;
@@ -64,45 +69,39 @@ const Button = styled.button`
 `
 
 const Slider = () => {
+    const [slideIndex, setSlideIndex] = useState(0)
+    const handleClick = (dir) => {
+        if(dir==='left'){
+            setSlideIndex(slideIndex !=0 ? slideIndex-1 : 2)
+        }else{
+            setSlideIndex(slideIndex!=2 ? slideIndex+1 : 0)
+        }
+    }
+
     return (
         <Container>
-            <Arrow direction='left'>
-                <RiArrowLeftSFill/>
+            <Arrow direction='left' onClick={() => handleClick('left')}>
+                <RiArrowLeftSFill />
             </Arrow>
-            <Wrapper>
-                <Slide>
-                    <ImgContainer>
-                        <Image src='../images/1.jpg'/>
-                    </ImgContainer>
-                    <InfoContainer>
-                        <Title>SUMMER SALE</Title>
-                        <Desc>DONT COMPROMISE ON STYLE GET FLAT 30% OFF FOR NEW ARRIVALS</Desc>
-                        <Button>SHOW NOW</Button>
-                    </InfoContainer>
-                </Slide>
-                <Slide>
-                    <ImgContainer>
-                        <Image src='../images/2.jpg'/>
-                    </ImgContainer>
-                    <InfoContainer>
-                        <Title>WINTER SALE</Title>
-                        <Desc>DONT COMPROMISE ON STYLE GET FLAT 30% OFF FOR NEW ARRIVALS</Desc>
-                        <Button>SHOW NOW</Button>
-                    </InfoContainer>
-                </Slide>
-                <Slide>
-                    <ImgContainer>
-                        <Image src='../images/3.jpg'/>
-                    </ImgContainer>
-                    <InfoContainer>
-                        <Title>POPULAR SALE</Title>
-                        <Desc>DONT COMPROMISE ON STYLE GET FLAT 30% OFF FOR NEW ARRIVALS</Desc>
-                        <Button>SHOW NOW</Button>
-                    </InfoContainer>
-                </Slide>
+            <Wrapper slideIndex={slideIndex}>
+                {sliderItems.map(item => {
+                    return (
+                        <Slide bg='f5fafd'>
+                            <ImgContainer>
+                                <Image src={item.img} />
+                            </ImgContainer>
+                            <InfoContainer>
+                                <Title>{item.title}</Title>
+                                <Desc>{item.desc}</Desc>
+                                <Button>SHOW NOW</Button>
+                            </InfoContainer>
+                        </Slide>)
+                })}
+
+
             </Wrapper>
-            <Arrow direction='right'>
-                <RiArrowRightSFill/>
+            <Arrow direction='right' onClick={() => handleClick('right')}>
+                <RiArrowRightSFill />
             </Arrow>
         </Container>
     )
