@@ -39,3 +39,22 @@ export const categories = [
         title:'LIGHT JACKETS'
     }
 ]
+
+export const popularProducts = [
+    {
+        id:1 ,
+        img:'./images/4.jpg',
+    },
+    {
+        id:2 ,
+        img: './images/5.jpg',
+    },
+    {
+        id:3 ,
+        img: './images/6.jpg',
+    },
+    {
+        id:4,
+        img: './images/7.jpg',
+    },
+]
