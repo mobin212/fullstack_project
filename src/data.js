@@ -25,17 +25,17 @@ export const sliderItems = [
 export const categories = [
     {
         id:1,
-        img:'https://www.savers.pk/images/thumbnails/823/720/detailed/109/a5cfaa336bb238471a1305c59a61b0d9.jpg_720x720q75.jpg',
+        img:'./images/10.png',
         title:'SHIRT STYLE'
     },
     {
         id:2,
-        img:'https://m.media-amazon.com/images/I/513aYEsT5WS._AC_UL1500_.jpg',
+        img:'./images/11.jpg',
         title:'LOUNGEWEAR LOVE'
     },
     {
         id:3,
-        img:'https://www.wigglestatic.com/product-media/101782785/Sportful-Women-s-Hot-Pack-Easy-Light-Jacket-Jackets-WHITE-SS19-1102028-101-XXL.jpg',
+        img:'./images/12.jpg',
         title:'LIGHT JACKETS'
     }
 ]
