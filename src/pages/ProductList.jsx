@@ -21,8 +21,13 @@ const Filter =styled.div`
 const FilterText =styled.span`
     font-size: 20px;
     font-weight: 600;
+    margin-right: 1.1em;
 `;
 const Select=styled.select`
+    padding: .8em;
+    margin-right: 1.2em;
+`;
+const Option=styled.option`
     
 `;
 
@@ -32,8 +37,66 @@ const ProductList = () => {
             <Navbar/>
             <Title>Dresses</Title>
             <FilterContainer>
-                <Filter><FilterText>Filter Products:</FilterText></Filter>
-                <Filter><FilterText>Sort Product:</FilterText></Filter>
+                <Filter>
+                    <FilterText>Filter Products:</FilterText>
+                    <Select>
+                        <Option disabled selected>
+                            Color
+                        </Option>
+                        <Option>
+                            White
+                        </Option>
+                        <Option>
+                            Black
+                        </Option>
+                        <Option>
+                            Red
+                        </Option>
+                        <Option>
+                            Blue
+                        </Option>
+                        <Option>
+                            Yellow
+                        </Option>
+                        <Option>
+                            Green
+                        </Option>
+                    </Select>
+                    <Select>
+                        <Option disabled selected>
+                            Size
+                        </Option>
+                        <Option>
+                            XS
+                        </Option>
+                        <Option>
+                            S
+                        </Option>
+                        <Option>
+                            M
+                        </Option>
+                        <Option>
+                            L
+                        </Option>
+                        <Option>
+                            XL
+                        </Option>
+                    </Select>
+                </Filter>
+                
+                {/* <Filter>
+                    <FilterText>Sort Product:</FilterText>
+                    
+                </Filter> */}
+
+                <Filter>
+                    <FilterText>Sort Product:</FilterText>
+                    <Select>
+                        <Option selected>Newst</Option>
+                        <Option>Price (asc)</Option>
+                        <Option>Price (des)</Option>
+                    </Select>
+                </Filter>
             </FilterContainer>
             <Products/>
             <Newsletter/>
