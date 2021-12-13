@@ -2,6 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import {BsFillCartFill} from 'react-icons/bs'
 import {AiOutlineSearch,AiFillHeart} from 'react-icons/ai'
+import { Link } from 'react-router-dom';
 
 const Info = styled.div`
     opacity: 0;
@@ -69,6 +70,7 @@ const Icon = styled.div`
 `;
 
 const Product = ({item}) => {
+    console.log(item)
     return (
         <Container>
             <Circle />
@@ -78,7 +80,9 @@ const Product = ({item}) => {
                     <BsFillCartFill/>
                 </Icon>
                 <Icon>
-                    <AiOutlineSearch/>
+                    <Link to={`/product/${item._id}`}>
+                        <AiOutlineSearch/>
+                    </Link>
                 </Icon>
                 <Icon>
                     <AiFillHeart/>

@@ -48,12 +48,12 @@ const ProductList = () => {
             [e.target.name]: e.target.value
         })
     }
-// console.log(params)
+console.log(params)
 
     return (
         <Container>
             <Navbar/>
-            <Title>Dresses</Title>
+            <Title>{params.category}</Title>
             <FilterContainer>
                 <Filter>
                     <FilterText>Filter Products:</FilterText>

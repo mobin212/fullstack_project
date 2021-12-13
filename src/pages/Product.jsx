@@ -1,10 +1,15 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
 import Footer from '../components/Footer';
 import Navbar from '../components/Navbar';
 import Newsletter from '../components/Newsletter';
 import {AiOutlinePlus,AiOutlineMinus} from 'react-icons/ai'
 import { mobile } from '../responsive';
+import { useParams } from 'react-router';
+import { publicRequest } from './requestMethod';
+import axios from 'axios';
+import { addProduct } from '../redux/cartRedux';
+import { useDispatch } from 'react-redux';
 
 const Container = styled.div`
 
@@ -106,30 +111,62 @@ const Button=styled.button`
 
 
 const Product = () => {
+    const id = useParams().id
+    const [product, setProduct] = useState({})
+    const [quantity, setQuantity] = useState(1)
+    const [size, setSize] = useState("")
+    const dispatch = useDispatch()
+
+    useEffect(() => {
+        const getProduct= async () => {
+            try{
+            const res =await publicRequest.get(`products/find/${id}`)
+            setProduct(res.data)
+        }
+            catch(err){
+                console.log(err)
+            }
+        };
+        getProduct()
+    }, [id])
+
+    const handleQuantity = (type) =>{
+        if(type === "dec" && quantity != 1){
+            setQuantity(pre=>pre -1)
+        }else if(type === "inc"){
+            setQuantity(pre=>pre +1)
+        }
+
+    }
+
+    const handleClick = (e) =>{
+        addProduct({product:product,quantity:quantity})
+    }
+
     return (
         <Container>
             <Navbar />
             <Wrapper>
                 <ImageContainer>
-                    <Image src='../../images/A.jpg'/>
+                    <Image src={product.img}/>
                 </ImageContainer>
                 <InfoContainer>
-                    <Title>Denim Junsuit</Title>
-                    <Desc>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Voluptatem omnis
-                        repellendus nostrum aliquam, natus dolorum ratione debitis odio ad maxime eveniet
-                        pariatur, molestiae quidem exercitationem explicabo aperiam, cum ut minus?
-                        magnam eos dolores repudiandae similique officiis consectetur totam!</Desc>
-                    <Price>$ 20</Price>
+                    <Title>{product.Title}</Title>
+                    <Desc>
+                        {product.desc}
+                    </Desc>
+                    <Price>$ {product.price}</Price>
                     <FilterContainer>
                         <Filter>
                             <FilterContainer>Color</FilterContainer>
+                            {/* {product.color.map((c)=>(
+                                <FilterColor color={c} key={c}/>)
+                            )} */}
                             <FilterColor color='black'/>
-                            <FilterColor color='darkblue'/>
-                            <FilterColor color='gray'/>
                         </Filter>
                         <Filter>
                             <FilterTitle>Size</FilterTitle>
-                            <FilterSize>
+                            <FilterSize onClick={(e)=>setSize(e.target.value)}>
                                 <FilterSizeOption>XS</FilterSizeOption>
                                 <FilterSizeOption>S</FilterSizeOption>
                                 <FilterSizeOption>M</FilterSizeOption>
@@ -140,11 +177,11 @@ const Product = () => {
                     </FilterContainer>
                     <AddContainer>
                         <AmountContainer>
-                            <AiOutlineMinus/>
-                            <Amount>1</Amount>
-                            <AiOutlinePlus/>
+                            <AiOutlineMinus onClick={()=>handleQuantity("dec")}/>
+                            <Amount>{quantity}</Amount>
+                            <AiOutlinePlus  onClick={()=>handleQuantity("inc")}/>
                         </AmountContainer>
-                        <Button>Add To Cart</Button>
+                        <Button onClick={(e)=>handleClick(e)}>Add To Cart</Button>
                     </AddContainer>
                 </InfoContainer>
             </Wrapper>

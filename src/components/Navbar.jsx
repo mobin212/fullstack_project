@@ -1,9 +1,10 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled, { createGlobalStyle } from 'styled-components';
 import { AiOutlineSearch, AiOutlineShoppingCart } from 'react-icons/ai'
 import { Badge } from '@material-ui/core';
 import './Navbar.scss'
 import {mobile} from '../responsive'
+import { useSelector } from 'react-redux';
 
 const Container = styled.div`
     height: 60px;
@@ -56,6 +57,8 @@ const MenuItem = styled.div`
 `
 
 const Navbar = () => {
+    const quantity = useSelector(state=>state.cart.quantity)
+    /* console.log(cart) */
     return (
         <Container>
             <Wrapper>
@@ -71,7 +74,7 @@ const Navbar = () => {
                     <MenuItem>REGISTER</MenuItem>
                     <MenuItem>SIGN IN</MenuItem>
                     <MenuItem>
-                        <Badge badgeContent={4} color="primary">
+                        <Badge badgeContent={quantity} color="primary">
                             <AiOutlineShoppingCart className='shop_icon_nav'/>
                         </Badge>
                     </MenuItem>

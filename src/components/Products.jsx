@@ -58,7 +58,11 @@ const Products = ({params, filters, sort}) => {
     },[sort]);
     return (
         <Container>
-            {filteredProducts.map((item,index)=>{
+            {params ? filteredProducts.map((item,index)=>{
+                return(
+                    <Product item={item} key={index}/>
+                )
+            }): products.map((item,index)=>{
                 return(
                     <Product item={item} key={index}/>
                 )
