@@ -133,14 +133,16 @@ const Product = () => {
     const handleQuantity = (type) =>{
         if(type === "dec" && quantity != 1){
             setQuantity(pre=>pre -1)
+            handleClick()
         }else if(type === "inc"){
             setQuantity(pre=>pre +1)
+            handleClick()
         }
 
     }
-
+console.log({...product,quantity,size})
     const handleClick = (e) =>{
-        addProduct({product:product,quantity:quantity})
+        dispatch(addProduct({...product,quantity,size}))
     }
 
     return (
